@@ -46,63 +46,49 @@ router.route('/post')
     );
 
 router.route('/movies')
-    .post(function (req, res) {
+    .post(function (req, res)
+    {
             console.log(req.body);
             res = res.status(200);
-            if (req.get('Content-Type')) {
+            if (req.get('Content-Type'))
+            {
                 console.log("Content-Type: " + req.get('Content-Type'));
                 res = res.type(req.get('Content-Type'));
             }
-            res.send({
-                status: 200,
-                message: "movie saved",
-                headers: req.headers,
-                query: req.query,
-                env: process.env.UNIQUE_KEY})
-        })
-        .get(function (req, res) {
+            res.send({status: 200, message: "movie saved", headers: req.headers, query: req.query, env: process.env.UNIQUE_KEY})
+    })
+    .get(function (req, res)
+    {
             console.log(req.body);
             res = res.status(200);
-            if (req.get('Content-Type')) {
+            if (req.get('Content-Type'))
+            {
                 console.log("Content-Type: " + req.get('Content-Type'));
                 res = res.type(req.get('Content-Type'));
             }
-            res.send({
-                status: 200,
-                message: "GET movies",
-                headers: req.headers,
-                query: req.query,
-                env: process.env.UNIQUE_KEY
-            })
-        })
-    .put(authJwtController.isAuthenticated, function (req, res) {
+            res.send({status: 200, message: "GET movies", headers: req.headers, query: req.query, env: process.env.UNIQUE_KEY})
+    })
+    .put(authJwtController.isAuthenticated, function (req, res)
+    {
         console.log(req.body);
         res = res.status(200);
-        if (req.get('Content-Type')) {
+        if (req.get('Content-Type'))
+        {
             console.log("Content-Type: " + req.get('Content-Type'));
             res = res.type(req.get('Content-Type'));
         }
-        res.send({
-            status: 200,
-            message: "movie updated",
-            headers: req.headers,
-            query: req.query,
-            env: process.env.UNIQUE_KEY
-        })
-    .delete(authController.isAuthenticated, function (req, res) {
+        res.send({status: 200, message: "movie updated", headers: req.headers, query: req.query, env: process.env.UNIQUE_KEY})
+    })
+    .delete(authController.isAuthenticated, function (req, res)
+    {
         console.log(req.body);
         res = res.status(200);
-        if (req.get('Content-Type')) {
+        if (req.get('Content-Type'))
+        {
             console.log("Content-Type: " + req.get('Content-Type'));
             res = res.type(req.get('Content-Type'));
         }
-        res.send({
-            status: 200,
-            message: "movie deleted",
-            headers: req.headers,
-            query: req.query,
-            env: process.env.UNIQUE_KEY
-        })
+        res.send({status: 200, message: "movie deleted", headers: req.headers, query: req.query, env: process.env.UNIQUE_KEY})
     });
 
 router.post('/signup', function(req, res) {
