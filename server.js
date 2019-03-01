@@ -70,7 +70,7 @@ router.route('/movies')
             res.send({
                 status: 200,
                 message: "GET movies",
-                headers: req.headerts,
+                headers: req.headers,
                 query: req.query,
                 env: process.env.UNIQUE_KEY
             })
