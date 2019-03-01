@@ -53,7 +53,7 @@ router.route('/movies')
                 console.log("Content-Type: " + req.get('Content-Type'));
                 res = res.type(req.get('Content-Type'));
             }
-            res.status(200).send({message: "GET movies"});
+            res.send({status: 200, message: "movie saved", headers: req.headers, query: req.query, env: req.env})
         }
     );
 
