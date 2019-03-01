@@ -45,7 +45,7 @@ router.route('/post')
         }
     );
 
-router.route('/postjwt')
+router.route('/movies')
     .post(authJwtController.isAuthenticated, function (req, res) {
             console.log(req.body);
             res = res.status(200);
