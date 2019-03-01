@@ -55,6 +55,16 @@ router.route('/movies')
             }
             res.send({status: 200, message: "movie saved", headers: req.headers, query: req.query, env: process.env.UNIQUE_KEY})
         }
+        .get(function (req, res) {
+            console.log(req.body);
+            res = res.status(200);
+            if ( req.get('Content-Type'))   {
+                console.log("Content-Type: " + req.get('Content-Type'));
+                res = res.type(req.get('Content-Type'));
+            }
+            res.send({status: 200, message: "GET movies", headers: req.headerts, query: req.query, env: process.env.UNIQUE_KEY})
+
+})
     );
 
 router.post('/signup', function(req, res) {
