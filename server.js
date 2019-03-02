@@ -100,7 +100,8 @@ router.route('/movies')
     });
 
 router.route('/signup')
-    .post(function(req, res) {
+    .post(function(req, res)
+    {
     if (!req.body.username || !req.body.password)
     {
         res.json({success: false, msg: 'Please pass username and password.'});
@@ -115,8 +116,8 @@ router.route('/signup')
         // save the user
         db.save(newUser); //no duplicate checking
         res.json({success: true, msg: 'Successful created new user.'});
-    }
-})
+        }
+    })
     .all(function(req, res)
     {
         console.log(req.body);
@@ -125,8 +126,8 @@ router.route('/signup')
     });
 
 router.route('/signin')
-    .post(function(req, res) {
-
+    .post(function(req, res)
+    {
         var user = db.findOne(req.body.username);
 
         if (!user) {
@@ -134,30 +135,32 @@ router.route('/signin')
         }
         else {
             // check if password matches
-            if (req.body.password === user.password)  {
+            if (req.body.password === user.password)
+            {
                 var userToken = { id : user.id, username: user.username };
                 var token = jwt.sign(userToken, process.env.SECRET_KEY);
                 res.json({success: true, token: 'JWT ' + token});
             }
-            else {
+            else
+                {
                 res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
+                }
             }
-        }
-    }
-    .all(function(req, res) {
+    })
+    .all(function(req, res)
+    {
         console.log(req.body);
         res = res.status(403);
         res.send("HTTP method not supported: only POST request is supported");
-    })
-);
+    });
 
 router.route('/')
-    .all(function(req, res) {
+    .all(function(req, res)
+    {
         console.log(req.body);
         res = res.status(403);
         res.send("HTTP method not supported");
-    }
-);
+    });
 
 app.use('/', router);
 app.listen(process.env.PORT || 8080);
