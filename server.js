@@ -33,10 +33,12 @@ function getJSONObject(req) {
 }
 
 router.route('/post')
-    .post(authController.isAuthenticated, function (req, res) {
+    .post(authController.isAuthenticated, function (req, res)
+        {
             console.log(req.body);
             res = res.status(200);
-            if (req.get('Content-Type')) {
+            if (req.get('Content-Type'))
+            {
                 console.log("Content-Type: " + req.get('Content-Type'));
                 res = res.type(req.get('Content-Type'));
             }
@@ -45,7 +47,7 @@ router.route('/post')
         }
     );
 
-router.route('/movies')
+router.route('/movies'
     .post(function (req, res)
     {
             console.log(req.body);
@@ -94,7 +96,8 @@ router.route('/movies')
         console.log(req.body);
         res = res.status(403);
         res.send("HTTP method not supported: only GET, POST, PUT, and DELETE requests are supported");
-    });
+    })
+);
 
 router.route('/signup', function(req, res) {
     if (!req.body.username || !req.body.password) {
