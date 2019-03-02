@@ -133,7 +133,7 @@ router.route('/signin', function(req, res) {
             else {
                 res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
             }
-        };
+        }
     }
     .all(function(req, res) {
         console.log(req.body);
