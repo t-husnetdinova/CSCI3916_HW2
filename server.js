@@ -159,7 +159,7 @@ router.route('/')
     {
         console.log(req.body);
         res = res.status(403);
-        res.send("HTTP method not supported");
+        res.send("ROOT FAIL! Invalid path/directory!");
     });
 
 app.use('/', router);
