@@ -47,7 +47,7 @@ router.route('/post')
         }
     );
 
-router.route('/movies'
+router.route('/movies')
     .post(function (req, res)
     {
             console.log(req.body);
@@ -92,34 +92,40 @@ router.route('/movies'
         }
         res.send({status: 200, message: "movie deleted", headers: req.headers, query: req.query, env: process.env.UNIQUE_KEY})
     })
-    .all(function (req, res) {
+    .all(function (req, res)
+    {
         console.log(req.body);
         res = res.status(403);
         res.send("HTTP method not supported: only GET, POST, PUT, and DELETE requests are supported");
-    })
-);
+    });
 
-router.route('/signup', function(req, res) {
-    if (!req.body.username || !req.body.password) {
+router.route('/signup')
+    .post(function(req, res) {
+    if (!req.body.username || !req.body.password)
+    {
         res.json({success: false, msg: 'Please pass username and password.'});
-    } else {
-        var newUser = {
+    }
+    else
+        {
+        var newUser =
+            {
             username: req.body.username,
             password: req.body.password
-        };
+            };
         // save the user
         db.save(newUser); //no duplicate checking
         res.json({success: true, msg: 'Successful created new user.'});
     }
-}
-    .all(function(req, res) {
+})
+    .all(function(req, res)
+    {
         console.log(req.body);
         res = res.status(403);
         res.send("HTTP method not supported: only POST request is supported");
-    })
-);
+    });
 
-router.route('/signin', function(req, res) {
+router.route('/signin')
+    .post(function(req, res) {
 
         var user = db.findOne(req.body.username);
 
@@ -128,7 +134,7 @@ router.route('/signin', function(req, res) {
         }
         else {
             // check if password matches
-            if (req.body.password == user.password)  {
+            if (req.body.password === user.password)  {
                 var userToken = { id : user.id, username: user.username };
                 var token = jwt.sign(userToken, process.env.SECRET_KEY);
                 res.json({success: true, token: 'JWT ' + token});
