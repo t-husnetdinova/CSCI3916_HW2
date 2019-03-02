@@ -89,9 +89,14 @@ router.route('/movies')
             res = res.type(req.get('Content-Type'));
         }
         res.send({status: 200, message: "movie deleted", headers: req.headers, query: req.query, env: process.env.UNIQUE_KEY})
+    })
+    .all(function (req, res) {
+        console.log(req.body);
+        res = res.status(403);
+        res.send("HTTP method not supported: only GET, POST, PUT, and DELETE requests are supported");
     });
 
-router.post('/signup', function(req, res) {
+router.route('/signup', function(req, res) {
     if (!req.body.username || !req.body.password) {
         res.json({success: false, msg: 'Please pass username and password.'});
     } else {
@@ -103,9 +108,15 @@ router.post('/signup', function(req, res) {
         db.save(newUser); //no duplicate checking
         res.json({success: true, msg: 'Successful created new user.'});
     }
-});
+}
+    .all(function(req, res) {
+        console.log(req.body);
+        res = res.status(403);
+        res.send("HTTP method not supported: only POST request is supported");
+    })
+);
 
-router.post('/signin', function(req, res) {
+router.route('/signin', function(req, res) {
 
         var user = db.findOne(req.body.username);
 
@@ -123,7 +134,21 @@ router.post('/signin', function(req, res) {
                 res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
             }
         };
-});
+    }
+    .all(function(req, res) {
+        console.log(req.body);
+        res = res.status(403);
+        res.send("HTTP method not supported: only POST request is supported");
+    })
+);
+
+router.route('/')
+    .all(function(req, res) {
+        console.log(req.body);
+        res = res.status(403);
+        res.send("HTTP method not supported");
+    }
+);
 
 app.use('/', router);
 app.listen(process.env.PORT || 8080);
